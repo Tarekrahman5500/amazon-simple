@@ -1,5 +1,6 @@
 import React from 'react';
 import './Card.css'
+import {Link} from "react-router-dom";
 
 const Card = (props) => {
     const card = props.card
@@ -21,12 +22,14 @@ const Card = (props) => {
     }
     return (
         <div>
-            <h4>Order Summary</h4>
+            <h4 className="text-primary">Order Summary</h4>
             <p>Item Ordered: {card.length}</p>
             <p>Product Price:${format(TotalPrice)}</p>
             <p><small>Shipping Cost: ${shipping}</small></p>
             <p><small>Tax + Vat: ${format(tax)}</small></p>
             <p>Total Price: ${format(FinalTotalPrice)}</p>
+            <br/>
+           <Link to="/review"> <button className="mainButton">Review Order</button></Link>
         </div>
     );
 };

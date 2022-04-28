@@ -3,6 +3,7 @@ import fakeData from '../../fakeData/'
 import './Shop.css'
 import Product from "../Product/Product";
 import Card from "../Card/Card";
+import {addToDb} from "../../utilities/fakedb";
 
 const Shop = () => {
     const first10 = fakeData.slice(0, 10)
@@ -10,9 +11,11 @@ const Shop = () => {
     const [card, setCard] = useState([])
 
     const handleAddProduct = (product) => {
-             console.log('button', product)
+
         const newCard = [...card, product]
         setCard(newCard)
+        const sameProduct = newCard.filter(pd => pd.key ===product.key)
+        addToDb(product.key,sameProduct.length)
     }
     console.log(fakeData)
     return (
@@ -22,8 +25,9 @@ const Shop = () => {
                 {
                     products.map((product, id) => <Product
                         product={product}
+                        showAddButton={true}
                         handleAddProduct = {handleAddProduct}
-                        key={product.id}></Product>)
+                        key={product.key}></Product>)
                 }
 
             </div>
